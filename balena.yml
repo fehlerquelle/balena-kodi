@@ -16,20 +16,17 @@ assets:
   repository:
     type: blob.asset
     data:
-      url: 'https://github.com/MIOGA-Entwicklung/balena-mioga-opensupports/'
+      url: 'https://github.com/fehlercode42/balena-kodi/'
   logo:
     type: blob.asset
     data:
-      url: 'https://github.com/MIOGA-Entwicklung/balena-mioga-opensupports/master/logo.png'
+      url: 'https://github.com/fehlercode42/balena-kodi/master/logo.png'
 data:
   applicationEnvironmentVariables:
-    - MYSQL_ROOT_PASSWORD: 'mioga100Prozent'
-    - MYSQL_DATABASE: opensupports
-    - MYSQL_USER: opensupports
     - MYSQL_PASSWORD: '77777777'
     - MYSQL_HOST: '127.0.0.1'
     - MYSQL_PORT: 3306
-  defaultDeviceType: genericx86_64
+  defaultDeviceType: aarch64
   supportedDeviceTypes:
     - genericx86_64
     - aarch64
