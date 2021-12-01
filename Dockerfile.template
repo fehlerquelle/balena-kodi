@@ -1,6 +1,6 @@
 # see https://hub.docker.com/r/balenalib/raspberry-pi-node/tags
-FROM balenalib/%%BALENA_MACHINE_NAME%%-node:latest-stretch-run
-
+#FROM balenalib/%%BALENA_MACHINE_NAME%%-node:latest-build
+FROM balenalib/raspberrypi3-64-ubuntu-node:latest-build
 # 1.Install wget and curl.  Only wget is needed for downloading repository.sandmann79.plugins-1.0.2.zip
 RUN apt-get clean && apt-get update && apt-get install -y \
   wget \
@@ -10,9 +10,10 @@ RUN apt-get clean && apt-get update && apt-get install -y \
 RUN  wget https://github.com/xbmc/repo-plugins/archive/refs/heads/leia.zip
 
 # Install apt deps
-RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install \
-  libraspberrypi-bin=1.20180328-1~nokernel1 libraspberrypi0=1.20180328-1~nokernel1 --allow-downgrades -y \
+RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --allow-downgrades -y \
+#  libraspberrypi0-bin=1.20180328-1~nokernel1 libraspberrypi0=1.20180328-1~nokernel1 --allow-downgrades -y \
   apt-utils \
+#  libraspberrypi0 \
   build-essential \
   libasound2-dev \
   libffi-dev \
@@ -20,11 +21,22 @@ RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install \
   python-dev \
   python-pip \
   git \
-  alsa-base \
+#  alsa-base \
   alsa-utils \
   fbset \
   kodi \
-  kodi-inputstream-adaptive \
+#  kodi-inputstream-adaptive \
+  kodi-data \
+  kodi-repository-kodi \
+  kodi-addons-dev \
+  kodi-eventclients-common \
+  kodi-eventclients-dev \
+  kodi-eventclients-kodi-send \
+  kodi-visualization-spectrum \
+#  kodi-wayland \
+  libkodiplatform-dev \
+#  kodi-gbm \
+  kodi-pvr-iptvsimple \
   libnss3 \
   && rm -rf /var/lib/apt/lists/*
 
@@ -55,7 +67,8 @@ WORKDIR /usr/src/app
 COPY "$SOURCEFOLDER/app/package.json" ./
 
 # NPM i app
-RUN JOBS=MAX npm i --production
+#RUN JOBS=MAX npm i --production
+RUN JOBS=MAX npm i
 
 # Move app and advancedsetting.xml to filesystem
 COPY "$SOURCEFOLDER/app" ./

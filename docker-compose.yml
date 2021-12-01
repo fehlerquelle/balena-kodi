@@ -1,0 +1,32 @@
+version: '2'
+
+volumes:
+  kodi-data:
+
+services:
+  main:
+    build: 
+      context: '.'
+      args:
+       KODI_VERSION: leia
+    privileged: true
+    ports:
+      - '8080:8080'
+      - '443:443'
+      - '80:80'
+    devices:
+      - '/dev/ttyUSB0:/dev/ttyUSB0'
+    environment:
+      - PHAT_DAC='0'
+      - ENABLE_REMOTE_CONTROL_VIA_ADVANCEDSETTINGS='1'
+    labels:
+      - io.balena.features.balena-socket= '1'
+      - io.balena.features.kernel-modules= '1'
+      - io.balena.features.firmware= '1'
+      - io.balena.features.dbus= '1'
+      - io.balena.features.sysfs= '1'
+      - io.balena.features.procfs= '1'
+      - io.balena.features.journal-logs= '1'
+      - io.balena.features.supervisor-api= '1'
+    volumes:
+      - kodi-data:/data/kodi
