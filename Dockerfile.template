@@ -1,6 +1,7 @@
 # see https://hub.docker.com/r/balenalib/raspberry-pi-node/tags
 #FROM balenalib/%%BALENA_MACHINE_NAME%%-node:latest-build
 FROM balenalib/raspberrypi3-64-ubuntu-node:latest-build
+
 # 1.Install wget and curl.  Only wget is needed for downloading repository.sandmann79.plugins-1.0.2.zip
 RUN apt-get clean && apt-get update && apt-get install -y \
   wget \
@@ -33,9 +34,9 @@ RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --a
   kodi-eventclients-dev \
   kodi-eventclients-kodi-send \
   kodi-visualization-spectrum \
-#  kodi-wayland \
+# kodi-wayland \
   libkodiplatform-dev \
-#  kodi-gbm \
+# kodi-gbm \
   kodi-pvr-iptvsimple \
   libnss3 \
   && rm -rf /var/lib/apt/lists/*
@@ -77,7 +78,7 @@ COPY "$SOURCEFOLDER/app" ./
 WORKDIR /
 
 ## uncomment if you want systemd
-ENV INITSYSTEM on
+#ENV INITSYSTEM on
 
 # Start app
 CMD ["bash", "/usr/src/app/start.sh"]
